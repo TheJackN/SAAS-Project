@@ -37,3 +37,4 @@ gem 'bcrypt'
 # Used for sending sensitive data
 gem 'figaro', '1.0'
 gem 'devise'
+gem 'pundit'

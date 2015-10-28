@@ -4,6 +4,10 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :wikis
+
+  validates :name, length: { minimum: 5, maximum: 100 }, presence: true
+
   before_save { self.role ||= :standard }
 
   enum role: [:standard, :premium, :admin]
