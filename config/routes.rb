@@ -2,8 +2,8 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :wikis, only: [:index, :show, :edit, :new]
-  resources :users, only: [:show]
+  resources :wikis
+  #resources :users, only: [:show]
 
   get 'welcome/about'
 
