@@ -5,13 +5,28 @@ class ApplicationController < ActionController::Base
 
   include Pundit
 
-  before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :authenticate_user!
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
+  before_action :configure_permitted_parameters, if: :devise_controller?
+  #before_action :authenticate_user!
+
+  def after_sign_in_path_for(resource)
+    wikis_path
+  end
+
+  def after_sign_out_path_for(resource)
+    root_path
+  end
 
   protected
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) << :name
     # :account_update
+  end
+
+  private
+  def user_not_authorized
+    flash[:error] = "You are not authorized to perform this action"
+    redirect_to(request.referrer || root_path)
   end
 end
