@@ -12,7 +12,9 @@
       </div>
     <% end %>
   </div>
-    <div class="col-md-4">
-      <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-success' %>
-    </div>
+    <% if user_authorized_for_new_wiki? %>
+      <div class="col-md-4">
+        <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-success' %>
+      </div>
+    <% end %>
 </div>

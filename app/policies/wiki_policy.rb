@@ -11,7 +11,7 @@ class WikiPolicy < ApplicationPolicy
   def show?
     if wiki.private? == false
       return wiki
-    else
+    elsif wiki.private? == true && user
       user.admin? || user.premium?
     end
   end

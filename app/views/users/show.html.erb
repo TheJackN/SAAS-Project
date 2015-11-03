@@ -1,2 +1,32 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div class="row">
+  <div class="col-md-8">
+    <div class="media">
+      <br />
+      <% avatar_url = User.avatar_url(@user, 128) %>
+      <% unless avatar_url.nil? %>
+        <div class="media-left">
+          <%= image_tag avatar_url, class: 'media-object' %>
+        </div>
+      <% end %>
+      <div class="media-body">
+        <h2 class="media-heading"><%= @user.name %></h2>
+        <small>
+          <%= pluralize(@user.wikis.count, 'wiki') %>
+        </small>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <h4><%= @user.role.capitalize %> Account</h4>
+    <br />
+    <p><%= link_to 'Edit Profile', edit_user_registration_path, class: 'btn btn-standard' %></p>
+    <!-- insert upgrade/downgrade stuff here -->
+  </div>
+</div>
+
+<br />
+<h3>Your Public Wiki's</h3>
+<%= render @user.wikis.where(private: false) %>
+<br />
+<h3>Your Private Wiki's</h3>
+<%= render @user.wikis.where(private: true) %>

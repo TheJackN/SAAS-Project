@@ -1,4 +1,12 @@
 class ChargesController < ApplicationController
+  protect_from_forgery :except => :webhook
+
+# Need to create Amount class with default class method to return charge amount in pennies 
+
+  def webhook
+    # Process webhook data in `params`
+  end
+
   def new
     @stripe_btn_data = {
       key: "#{ Rails.configuration.stripe[:publishable_key] }",
