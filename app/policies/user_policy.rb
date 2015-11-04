@@ -1,15 +1,15 @@
 class UserPolicy < ApplicationPolicy
-  attr_reader :user
-
-# The way these are written, a nil user will raise exception errors.
-
-  def initialize (user, wiki)
-    @user = user
-    @wiki = wiki
-  end
+#   attr_reader :user
+#
+# # The way these are written, a nil user will raise exception errors.
+#
+#   def initialize (user)
+#     @user = user
+#
+#   end
 
   def show?
-    user.present?
+    user.present? && record == user
   end
 
   def upgrade?
