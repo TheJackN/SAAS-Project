@@ -37,6 +37,11 @@ gem 'turbolinks'
 gem 'bcrypt'
 # Used for sending sensitive data
 gem 'figaro', '1.0'
+# Used to create and validate user accounts
 gem 'devise'
+# Used to easily create authorization policies
 gem 'pundit'
+# Used to make the big bucks
 gem 'stripe'
+# Used for reading MarkDown
+gem 'redcarpet'

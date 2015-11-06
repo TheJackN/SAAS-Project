@@ -57,7 +57,7 @@ class WikiPolicy < ApplicationPolicy
       elsif user.admin?
         return scope.all
       elsif user.premium?
-        return ((scope.where(user: 'user')) && (scope.where(private: false)))
+        return scope.all.select {|w| w.private == false || w.user == user}
       end
     end
   end

@@ -28,14 +28,14 @@
         <% if current_user.role == 'standard' %>
           <p><%= link_to 'Upgrade Account', new_charge_path, class: 'btn btn-success' %></p>
         <% elsif current_user.role == 'premium' %>
-          <%= link_to "Cancel Subscription", charges_destroy_path, method: :delete, class: 'btn btn-danger', data: {confrim: 'Are you sure you want to cancel your subscription?'} %>
+          <%= link_to "Cancel Subscription", charges_destroy_path, method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to cancel your subscription?'} %>
         <% end %>
       </div>
     </div>
   </div>
 </div>
 
-<br />
+<br/>
 <h3>Your Public Wiki's</h3>
 <%= render @user.wikis.where(private: false) %>
 <br />
