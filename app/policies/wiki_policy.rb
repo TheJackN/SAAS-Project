@@ -17,7 +17,11 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def update?
-    user.present? && (wiki.user == user || user.admin?)
+    if wiki.private? == false
+      user.present? && (wiki.user == user || user.admin?)
+    else
+      user.present? && (wiki.user == user && user.premium? || user.admin?)
+    end
   end
 
   def new?
@@ -33,7 +37,11 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def edit?
-    user.present? && (wiki.user == user || user.admin?) # collaborator
+    if wiki.private? == false
+      user.present? && (wiki.user == user || user.admin?)
+    else
+      user.present? && (wiki.user == user && user.premium? || user.admin?) # collaborator
+    end
   end
 
   class Scope < Scope
@@ -54,11 +62,3 @@ class WikiPolicy < ApplicationPolicy
     end
   end
 end
-
-# if policy(Wiki.new).create?
-#
-# def create
-#   #load
-#   @wikis = policy_scope(Wiki)
-#   authorize @wiki
-# end

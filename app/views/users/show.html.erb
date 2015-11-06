@@ -10,17 +10,28 @@
       <% end %>
       <div class="media-body">
         <h2 class="media-heading"><%= @user.name %></h2>
-        <small>
-          <%= pluralize(@user.wikis.count, 'wiki') %>
-        </small>
+          <h4><%= pluralize(@user.wikis.count, 'wiki') %></h4>
       </div>
     </div>
   </div>
   <div class="col-md-4">
-    <h4><%= @user.role.capitalize %> Account</h4>
-    <br />
-    <p><%= link_to 'Edit Profile', edit_user_registration_path, class: 'btn btn-standard' %></p>
-    <!-- insert upgrade/downgrade stuff here -->
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4><%= @user.role.capitalize %> Account</h4>
+      </div>
+      <div class="panel-body">
+        <br />
+        <p><strong>Name:</strong> <%= @user.name %></p>
+        <p><strong>Email:</strong> <%= @user.email %></p>
+        <p><%= link_to 'Edit Profile Info', edit_user_registration_path, class: 'btn btn-success' %></p>
+        <p><strong>Account Type:</strong> <%= @user.role %></p>
+        <% if current_user.role == 'standard' %>
+          <p><%= link_to 'Upgrade Account', new_charge_path, class: 'btn btn-success' %></p>
+        <% elsif current_user.role == 'premium' %>
+          <%= link_to "Cancel Subscription", charges_destroy_path, method: :delete, class: 'btn btn-danger', data: {confrim: 'Are you sure you want to cancel your subscription?'} %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
 

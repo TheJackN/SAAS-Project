@@ -1,0 +1,5 @@
+<%= form_tag charges_destroy_path do %>
+  <h4>Press the button to downgrade your account back to standard like a noob</h4>
+  <p>Be warned, senior noob, all your private wikis will automatically be made public once cancelled.</P>
+  <%= link_to "Cancel Subscription", charges_cancel_plan_path, method: :destroy, class: 'btn btn-danger', data: {confrim: 'Are you sure you want to cancel your subscription?'} %>
+<% end %>

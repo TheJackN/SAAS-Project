@@ -1,4 +1,5 @@
 <%= form_tag charges_path do %>
-  <h4>Click that button!!</h4>
-  <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount=<%= @stripe_btn_data[:amount] %> data-description="<%= @stripe_btn_data[:description] %>" ></script>
+    <h3>Premium plan costs $9.99/month</h3>
+    <h4>Click that button to Sign Up NOW!!</h4>
+    <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-plan=<%= @stripe_btn_data[:plan] %> data-description="<%= @stripe_btn_data[:description] %>" ></script>
 <% end %>

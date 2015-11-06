@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   resources :charges, only: [:new, :create]
 
+  delete 'charges/destroy' => 'charges#destroy'
+
   get 'welcome/about'
 
   root to: 'welcome#index'
