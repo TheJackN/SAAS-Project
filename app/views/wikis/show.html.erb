@@ -9,7 +9,7 @@
 <br />
 <div class="row">
   <div class="col-md-8">
-    <p><%= @wiki.body %></p>
+    <p><%= markdown(@wiki.body) %></p>
     <br />
   </div>
   <% if user_authorized_for_crud?(@wiki) %>
