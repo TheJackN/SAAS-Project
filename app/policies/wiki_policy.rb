@@ -1,8 +1,6 @@
 class WikiPolicy < ApplicationPolicy
   attr_reader :user, :wiki
 
-# The way these are written, a nil user will raise exception errors.
-
   def initialize (user, wiki)
     @user = user
     @wiki = wiki

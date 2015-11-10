@@ -1,0 +1,5 @@
+<%= form_for [wiki, Collaboration.new] do |f| %>
+  <%= label_tag :email %>
+  <%= text_field_tag :email %>
+  <% f.submit "Add" %>
+<% end %>

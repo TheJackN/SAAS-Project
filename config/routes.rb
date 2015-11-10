@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :wikis
+  resources :wikis do
+    resources :collaborations, only: [:create, :destroy]
+  end
 
   resources :users, only: [:show]
 
