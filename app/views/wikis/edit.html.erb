@@ -14,14 +14,18 @@
   </div>
   <% if (@wiki.user == current_user && current_user.premium?) || current_user.admin? %>
     <div class="form-group">
-      <p>Add Collaborators</p>
+      <h3>Add Collaborators</h3>
       <%= render partial: 'collaborations/form', locals: { wiki: @wiki } %>
     </div>
+    <br />
     <% if @wiki.users.any? %>
       <div class="form-group">
+        <h3>Current Collaborators</h3>
+        <ul>
         <% @wiki.collaborations.each do |collaboration| %>
-            <strong><%= collaboration.user.name %></strong> <%= link_to "Remove Collaborator", wiki_collaboration_path(@wiki, collaboration), method: :delete, class: 'btn btn-danger' %>
+            <li><h4><%= collaboration.user.name %></h4> <%= link_to "Remove #{collaboration.user.name}", wiki_collaboration_path(@wiki, collaboration), method: :delete, class: 'btn btn-danger' %></li>
         <% end %>
+        </ul>
       </div>
     <% end %>
   <% end %>

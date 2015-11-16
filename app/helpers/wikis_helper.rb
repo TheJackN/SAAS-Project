@@ -7,6 +7,10 @@ module WikisHelper
     current_user && (current_user.admin? || current_user == wiki.user)
   end
 
+  def user_collaborator?(wiki)
+    current_user && (current_user.admin? || current_user == wiki.user || wiki.users.include?(current_user))
+  end
+
   def user_authorized_for_private?
     current_user && (current_user.admin? || current_user.premium?)
   end

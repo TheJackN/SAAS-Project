@@ -16,9 +16,9 @@ class WikiPolicy < ApplicationPolicy
 
   def update?
     if wiki.private? == false
-      user.present? && (wiki.user == user || user.admin?)
+      user.present? && (wiki.user == user || wiki.users.include?(user) || user.admin?)
     else
-      user.present? && (wiki.user == user && user.premium? || user.admin?)
+      user.present? && (wiki.user == user && user.premium? || wiki.users.include?(user) || user.admin?)
     end
   end
 
@@ -36,9 +36,9 @@ class WikiPolicy < ApplicationPolicy
 
   def edit?
     if wiki.private? == false
-      user.present? && (wiki.user == user || user.admin?)
+      user.present? && (wiki.user == user || wiki.users.include?(user) || user.admin?)
     else
-      user.present? && (wiki.user == user && user.premium? || user.admin?) # collaborator
+      user.present? && (wiki.user == user && user.premium? || wiki.users.include?(user) || user.admin?)
     end
   end
 
@@ -55,7 +55,7 @@ class WikiPolicy < ApplicationPolicy
       elsif user.admin?
         return scope.all
       elsif user.premium?
-        return scope.all.select {|w| w.private == false || w.user == user}
+        return scope.all.select {|w| w.private == false || w.user == user || w.users.include?(user)}
       end
     end
   end
